@@ -1,0 +1,8 @@
+admin_secret: xxx
+ntm:
+  listen_port: 8008
+  upstream_port: 8006
+  upstream_ip: gateway.docker.internal
+apm:
+  collector_url: "http//collector.apm.example.com"
+  client_id: test
