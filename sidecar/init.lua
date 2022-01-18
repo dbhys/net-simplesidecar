@@ -9,13 +9,15 @@ local sidecar = {
 
 
 function sidecar.init()
+    print(runtime_config.default_upstream_ip)
     local ok, err = runtime_config.load()
     if not ok then
         ngx.log(ngx.ERR, "config load failed: ", err)
         ngx.exit(1)
     end
 
-    ngx.log(ngx.ERR, "init complete")
+    -- ngx.INFO won't work in init_by_lua_block
+    ngx.log(ngx.WARN, "init complete")
 end
 
 function sidecar.access()

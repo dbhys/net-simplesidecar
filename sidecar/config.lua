@@ -27,7 +27,7 @@ local config_schema = {
                     minimum = 10,
                     maximum = 65535
                 },
-                rs_oauth = {
+                oidc_rs_verifier = {
                     type = "object",
                     properties = {
                         issuer = {
@@ -50,7 +50,7 @@ local config_schema = {
                                                 type = "string",
                                             },
                                             referrer = {
-                                                type = "string",
+                                                type = "boolean",
                                             }
                                         }
                                     }

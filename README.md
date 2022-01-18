@@ -16,9 +16,9 @@ It is base on openresty and dbhys/openresty-stage images.
 
 ### Build
 
-docker build -f Dockerfile-build -t dbhys/net-simplesidecar-build:1.0.3 .
+docker build -f Dockerfile-build -t dbhys/net-simplesidecar-build:1.0.2 .
 
-docker build -t dbhys/net-simplesidecar:1.0.3 .
+docker build -t dbhys/net-simplesidecar:1.0.2 .
 
 ### Run
 
@@ -28,17 +28,17 @@ if you want to proxy in mac, please add upstream_ip = gateway.docker.internal
 
 #### Run a container
 
-docker run -d --rm --name ssc --net=host -v /Users/king/Workspace/dbhys/traffic-migration/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.0
+docker run -d --rm --name ssc --net=host -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.1
 
 MAC: 
-docker run -d --rm --name ssc -p your_listen_port:your_listen_port -v /Users/king/Workspace/dbhys/traffic-migration/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.0
-docker run -d --rm --name ssc -p 8008:8008 -v /Users/king/Workspace/dbhys/traffic-migration/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.0
+docker run -d --rm --name ssc -p your_listen_port:your_listen_port -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.2
+docker run -d --rm --name ssc -p 8008:8008 -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.2
 
 #### Run in container
 
-1. docker run -it --rm --name ssc --net=host dbhys/net-simplesidecar:1.0.0 sh
+1. docker run -it --rm --name ssc --net=host dbhys/net-simplesidecar:1.0.2 sh
 MAC:
-docker run -it --rm --name ssc -p 8008:8008 -v /Users/king/Workspace/dbhys/traffic-migration/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.0 sh
+docker run -it --rm --name ssc -p 8008:8008 -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.2 sh
 
 2. /usr/local/openresty/bin/openresty -p ${PREFIX} -g 'daemon off;'
 

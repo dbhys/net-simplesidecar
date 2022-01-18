@@ -1,8 +1,23 @@
 admin_secret: xxx
 ntm:
   listen_port: 8008
-  upstream_port: 8006
-  upstream_ip: gateway.docker.internal
+  upstream_port: 8045
+  #upstream_ip: gateway.docker.internal
+  oidc_rs_verifier: 
+    issuer: "http://oidc-provider.example.com"
+    checkers: 
+      - checker: 
+        route: /
+        scope: "api.asd a"
+      - checker: 
+        route: /test2
+        scope: api  
+        referrer: true
+      - checker: 
+        route: /test3 
+        referrer: true
+    
 apm:
   collector_url: "http//collector.apm.example.com"
   client_id: test
+  client_secret: xxxxxx

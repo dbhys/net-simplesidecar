@@ -1,11 +1,13 @@
-ARG SIMPLE_SIDECAR_VERSION=1.0.1
+ARG BUILD_VERSION=1.0.2
 ARG BUILD_PREFIX=/usr/local/sidecar
 
 FROM openresty/openresty:1.19.9.1-5-alpine-fat as build-stage
 
-ARG SIMPLE_SIDECAR_VERSION
+ARG BUILD_VERSION
 ARG BUILD_PREFIX
 
 COPY ./sidecar/ ${BUILD_PREFIX}/src/
 COPY ./rockspec ${BUILD_PREFIX}/rockspec
-RUN luarocks install ${BUILD_PREFIX}/rockspec/dbhys-net-simplesidecar-${SIMPLE_SIDECAR_VERSION}-1.rockspec --tree ${BUILD_PREFIX}/deps
+RUN luarocks install ${BUILD_PREFIX}/rockspec/dbhys-net-simplesidecar-${BUILD_VERSION}-1.rockspec --tree ${BUILD_PREFIX}/deps
+
+# docker build -f Dockerfile-build -t dbhys/net-simplesidecar-build:1.0.2 .

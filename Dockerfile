@@ -1,12 +1,12 @@
-ARG SIMPLE_SIDECAR_VERSION=1.0.1
+ARG SIDECAR_BUILD_VERSION=1.0.2
 ARG BUILD_PREFIX=/usr/local/sidecar
 
-FROM dbhys/net-simplesidecar-build:2.0.0 as build-stage
+FROM dbhys/net-simplesidecar-build:${SIDECAR_BUILD_VERSION} as build-stage
 
 FROM dbhys/openresty-stage:2.0.1
 ARG BUILD_PREFIX
 
-LABEL name="dbhys net simplesidecar" version="1.0.1"
+LABEL name="dbhys net simplesidecar" version="1.0.2"
 
 MAINTAINER Milas King
 
@@ -27,3 +27,5 @@ RUN mkdir -p logs \
 CMD /usr/local/openresty/bin/openresty -p ${PREFIX} -g 'daemon off;'
 
 STOPSIGNAL SIGQUIT
+
+# docker build -t dbhys/net-simplesidecar:1.0.2 .
