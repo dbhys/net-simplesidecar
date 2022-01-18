@@ -10,6 +10,10 @@ description = {
       DBHYS net-simplesidecar is a simple sidecar, can be used for record access log,
       traffic migration, app oauth, monitor etc.
    ]],
+   homepage = "https://github.com/dbhys/net-simplesidecar.git",
+   issues = "https://github.com/dbhys/net-simplesidecar/issues",
+   labels = { "sidecar", "traffic migration", "openresty", "oidc", "apm" },
+   maintainer = "dbhys<official@dbhys.com>",
    license = "MIT/X11",
 }
 dependencies = {
