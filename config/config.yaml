@@ -5,6 +5,7 @@ ntm:
   #upstream_ip: gateway.docker.internal
   oidc_rs_verifier: 
     issuer: "http://oidc-provider.example.com"
+    token_header_name: "DBHYS_Authorization"
     checkers: 
       - checker: 
         route: /
@@ -18,6 +19,7 @@ ntm:
         referrer: true
     
 apm:
+  enable: true
   collector_url: "http//collector.apm.example.com"
   client_id: test
   client_secret: xxxxxx

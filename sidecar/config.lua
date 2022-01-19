@@ -33,6 +33,9 @@ local config_schema = {
                         issuer = {
                             type = "string",
                         },
+                        token_header_name = {
+                            type = "string",
+                        },
                         checkers = {
                             type = "array",
                             minItems = 1,
@@ -70,6 +73,9 @@ local config_schema = {
         apm = {
             type = "object",
             properties = {
+                enable = {
+                    type = "boolean"
+                },
                 collector_url = {
                     type = "string"
                 },
@@ -80,7 +86,7 @@ local config_schema = {
                     type = "string"
                 }, 
             },
-            required = {"collector_url", "client_id"},
+            required = {"enable", "collector_url", "client_id"},
         },
         required = {"ntm"}
 
