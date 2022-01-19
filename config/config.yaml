@@ -4,6 +4,7 @@ ntm:
   upstream_port: 8045
   #upstream_ip: gateway.docker.internal
   oidc_rs_verifier: 
+    enable: true
     issuer: "http://oidc-provider.example.com"
     token_header_name: "DBHYS_Authorization"
     checkers: 

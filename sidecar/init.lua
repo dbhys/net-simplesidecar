@@ -16,17 +16,22 @@ function sidecar.init()
         ngx.exit(1)
     end
 
-    rs_verifier.init()
     -- ngx.INFO won't work in init_by_lua_block
     ngx.log(ngx.WARN, "init complete")
 end
 
+function sidecar.init_worker()
+    rs_verifier.init_worker()
+end
+
 function sidecar.access()
-    local _, err = rs_verifier.verify()
-    if err ~= nil then
-        ngx.log(ngx.ERR, "verify failed: ", err)
-        tool.simple_response(ngx.HTTP_FORBIDDEN, err)
-        return
+    if rs_verifier.available then
+        local _, err = rs_verifier.verify()
+        if err ~= nil then
+            ngx.log(ngx.ERR, "verify failed: ", err)
+            tool.simple_response(ngx.HTTP_FORBIDDEN, err)
+            return
+        end
     end
 
     ngx.var.upstream_host =  runtime_config.config.ntm.upstream_ip .. ":" .. runtime_config.config.ntm.upstream_port

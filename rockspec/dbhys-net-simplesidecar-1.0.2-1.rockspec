@@ -11,8 +11,7 @@ description = {
       traffic migration, app oauth, monitor etc.
    ]],
    homepage = "https://github.com/dbhys/net-simplesidecar.git",
-   issues = "https://github.com/dbhys/net-simplesidecar/issues",
-   labels = { "sidecar", "traffic migration", "openresty", "oidc", "apm" },
+   -- issues = "https://github.com/dbhys/net-simplesidecar/issues",
    maintainer = "dbhys<official@dbhys.com>",
    license = "MIT/X11",
 }

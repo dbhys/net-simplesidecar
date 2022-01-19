@@ -30,6 +30,9 @@ local config_schema = {
                 oidc_rs_verifier = {
                     type = "object",
                     properties = {
+                        enable = {
+                            type = "boolean",
+                        },
                         issuer = {
                             type = "string",
                         },

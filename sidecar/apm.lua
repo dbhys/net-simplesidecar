@@ -1,21 +1,21 @@
-local config = require "sidecar.config"
+local runtime_config = require "sidecar.config"
 local _M = {
 	available = false,
 	tracer = {}
 }
 local origin_tracer
 function _M.init_worker()
-	if config.apm and config.apm.enable then
-		if not config.apm.client_id or not config.apm.instance_Name or not config.apm.collector_url then
+	if runtime_config.config.apm and runtime_config.config.apm.enable then
+		if not runtime_config.config.apm.client_id or not runtime_config.config.apm.instance_Name or not runtime_config.config.apm.collector_url then
 			return false, "invalid apm config"
 		end
 		local metadata_buffer = ngx.shared.tracing_buffer
-		metadata_buffer:set('serviceName', config.apm.client_id)
+		metadata_buffer:set('serviceName', runtime_config.config.apm.client_id)
 		-- Instance means the number of Nginx deloyment, does not mean the worker instances
-		metadata_buffer:set('serviceInstanceName', config.apm.instance_Name)
+		metadata_buffer:set('serviceInstanceName', runtime_config.config.apm.instance_Name)
 		origin_tracer = require "skywalking.tracer"
 
-		require("skywalking.client"):startBackendTimer(config.apm.collector_url)
+		require("skywalking.client"):startBackendTimer(runtime_config.config.apm.collector_url)
 
 		_M.available = true
 		return true

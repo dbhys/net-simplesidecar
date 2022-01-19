@@ -13,13 +13,13 @@ MAINTAINER Milas King
 COPY ./bin /usr/local/bin
 COPY ./crontabs /var/spool/cron/crontabs
 
+COPY ./sidecar ./sidecar
+COPY ./conf ./conf
+COPY ./config ./config
+
 COPY --from=build-stage ${BUILD_PREFIX}/deps/lib/lua/5.1/ /usr/local/openresty/luajit/lib/lua/5.1/
 COPY --from=build-stage ${BUILD_PREFIX}/deps/share/lua/5.1/ /usr/local/openresty/luajit/share/lua/5.1/
 COPY ./deps/ ./deps/
-
-COPY ./sidecar/ ./sidecar/
-COPY ./conf/ ./conf/
-COPY ./config/ ./config/
 
 RUN mkdir -p logs \
     && /usr/local/bin/replace_listen_port.sh
