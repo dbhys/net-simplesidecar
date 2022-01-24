@@ -33,5 +33,7 @@ docker stop temp
 
 **Third:**
 
-Mount your config dir to the container
+Mount your config dir to the container:
+```
 docker run -d --name sidecar -v yourconfigdir:/usr/local/stage/config/ dbhys/net-simplesidecar:$verison
+```
