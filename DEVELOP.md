@@ -18,7 +18,7 @@ docker run -d --rm --name ssc --net=host -v /Users/king/Workspace/dbhys/net-simp
 
 MAC: 
 docker run -d --rm --name ssc -p your_listen_port:your_listen_port -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.2
-docker run -d --rm --name ssc -p 8008:8008 -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.2
+docker run -d --name ssc -p 8008:8008 -v /Users/king/Workspace/dbhys/net-simplesidecar/config:/usr/local/stage/config dbhys/net-simplesidecar:1.0.2
 
 #### Run in container
 

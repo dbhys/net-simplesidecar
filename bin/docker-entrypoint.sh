@@ -12,3 +12,5 @@ function __readKey() {
 _listen_port=$( __readKey config/config.yaml listen_port )
 
 sed -i "s/{{listen_port}}/${_listen_port=80}/g" conf/nginx.conf
+
+exec "$@"
