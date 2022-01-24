@@ -14,13 +14,24 @@ It is base on openresty and dbhys/openresty-stage images.
 
 ## How to use
 
-Notice: you must add $PREFIX dir to the lua_package_path in your conf/nginx.conf. the example is in the [conf/nginx.conf](conf/nginx.conf). actually, the $prefix is the dir behind "openresty -p", in our image it is the same as $PREFIX.
+**First:** 
 
-### Mount workdir
+We add env: $PREFIX, which should be dir your code in and is the same as openresty's $prefix or ${prefix}, you should add $PREFIX dir to the lua_package_path in your conf/nginx.conf. the example is in the [conf/nginx.conf](conf/nginx.conf), the [default value of $PREFIX](https://github.com/dbhys/openresty-stage/blob/master/Dockerfile) is /usr/local/stage.
 
-If you don't want to change anything of the container, just run your lua code, the best way is mount your workdir
-to the container workdir(/usr/local/stage), and the dir must contain the file conf/nginx.conf
+**Second:** 
 
-### From this image
+Copy config/config.yaml from git or from the container use docker command:
+``` 
 
-You can build your own image from this image, May be just replace those enviroment variables or commands (PREFIX, COPY, EXPOSE...)
+docker run -d --rm --name temp dbhys/net-simplesidecar:$verison
+
+docker cp temp:/usr/local/stage/config/config.yaml $yourdir
+
+docker stop temp
+
+```
+
+**Third:**
+
+Mount your config dir to the container
+docker run -d --name sidecar -v yourconfigdir:/usr/local/stage/config/ dbhys/net-simplesidecar:$verison
