@@ -1,11 +1,12 @@
 admin_secret: xxx
-ntm:
+proxy:
   listen_port: 8008
-  upstream_port: 8045
+  upstream_port: 8025
   #upstream_ip: gateway.docker.internal
   oidc_rs_verifier: 
     enable: true
     issuer: "http://oidc-provider.example.com"
+    well_known_uri: "/.well-known/app_oauth_configuration"
     token_header_name: "DBHYS_Authorization"
     checkers: 
       - checker: 
@@ -22,5 +23,6 @@ ntm:
 apm:
   enable: true
   collector_url: "http//collector.apm.example.com"
+  #instance_name: can_be_a_cluster_name
   client_id: test
   client_secret: xxxxxx

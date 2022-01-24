@@ -1,40 +1,61 @@
 local openidc = require "resty.openidc"
 local json = require "cjson.safe"
 
+local enum = require "sidecar.enum"
 local runtime_config = require "sidecar.config"
 
 local opts
-_M = {
-    available = false
+
+local status = {
+	enable = false,
+	health = enum.health.RED,
+	info = "Unknown"
 }
 
+_M = {
+}
+
+function _M.status()
+    local verifier_config = runtime_config.config().oidc_rs_verifier
+    if not verifier_config or not verifier_config.enable then
+		status.enable = true
+	else	
+		status.enable = false
+	end
+	return {worker_id= ngx.worker.id(), status = status}
+end
+
 function _M.init_worker()
-    if not runtime_config.config.ntm.oidc_rs_verifier or not runtime_config.config.ntm.oidc_rs_verifier.enable then
+    local verifier_config = runtime_config.config().oidc_rs_verifier
+
+    if not verifier_config or not verifier_config.enable then
         return
+    end
+    local well_known_uri = "/.well-known/openid-configuration"
+    if verifier_config.well_known_uri then
+        well_known_uri = verifier_config.well_known_uri
     end
 
     opts = {
-        discovery = runtime_config.config.ntm.oidc_rs_verifier.issuer.."/.well-known/openid-configuration",
+        discovery = verifier_config.issuer .. well_known_uri,
         timeout = 5,
         jwk_expires_in = 1000,
         discovery_expires_in = 1000,
         system_leeway = 60*60*24,
-        token_header_name = runtime_config.config.ntm.oidc_rs_verifier.token_header_name or "",
+        token_header_name = verifier_config.token_header_name or "",
     }
 
-    ngx.timer.at(0, _M._discovery())
-end
-
-function _M._discovery()
-    opts.discovery = openidc.get_discovery_doc(opts)
-    _M.available = true
+    opts.discovery, err = openidc.get_discovery_doc(opts)
+    status.health = (err) and enum.health.RED or enum.health.GREEN
 end
 
 function _M.verify()
-    if not _M.available then
-        return nil, "not available"
+    if not status.enable then
+        return nil, "verifier disabled"
     end
-    opts.discovery = openidc.get_discovery_doc(opts)
+    opts.discovery, err = openidc.get_discovery_doc(opts)
+
+    status.health = (err) and enum.health.RED or enum.health.GREEN
 
     local credential, err = openidc.bearer_jwt_verify(opts)
 

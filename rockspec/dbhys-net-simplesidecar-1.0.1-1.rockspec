@@ -2,7 +2,7 @@ package = "dbhys-net-simplesidecar"
 version = "1.0.1-1"
 supported_platforms = {"linux", "macosx"}
 source = {
-   url = "file:///usr/local/sidecar/src/init.lua",
+   url = "https://github.com/dbhys/net-simplesidecar.git",
 }
 description = {
    summary = "dbhys-net-simplesidecar is a simple sidecar",

@@ -2,7 +2,7 @@ package = "dbhys-net-simplesidecar"
 version = "1.0.2-1"
 supported_platforms = {"linux", "macosx"}
 source = {
-   url = "file:///usr/local/sidecar/src/init.lua",
+   url = "https://github.com/dbhys/net-simplesidecar.git",
 }
 description = {
    summary = "dbhys-net-simplesidecar is a simple sidecar",
@@ -20,7 +20,7 @@ dependencies = {
     "penlight = 1.12.0-1",
     "jsonschema = 0.9.6-0",
     "api7-lua-tinyyaml = 0.4.2-0",
-    "dbhys-openresty-skywalking = 0.1.0-1",
+    "dbhys-openresty-skywalking = 0.1.2-0",
     "lua-resty-openidc = 1.7.5-1",
 }
 build = {
