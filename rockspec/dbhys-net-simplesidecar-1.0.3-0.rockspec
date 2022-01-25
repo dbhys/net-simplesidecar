@@ -1,8 +1,9 @@
 package = "dbhys-net-simplesidecar"
-version = "1.0.2-1"
+version = "1.0.3-0"
 supported_platforms = {"linux", "macosx"}
 source = {
-   url = "https://github.com/dbhys/net-simplesidecar.git",
+   url = "git://github.com/dbhys/net-simplesidecar",
+   branch = master
 }
 description = {
    summary = "dbhys-net-simplesidecar is a simple sidecar",
